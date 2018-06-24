@@ -11,6 +11,8 @@ app.use(bodyParser.json());
 mongoose.connect(keys.mongoURI)
 
 require('./models/User');
+require('./models/Pacient');
+require('./models/Project');
 require('./services/passport');
 app.use(require('./routes'));
 
