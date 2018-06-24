@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
-var uniqueValidator = require('mongoose-unique-validator');
-var crypto = require('crypto');
-var jwt = require('jsonwebtoken');
-var keys = require('../config/keys');
+const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
+const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const keys = require('../config/keys');
 
 var UserSchema = new mongoose.Schema({
   username: {type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/^[a-zA-Z0-9]+$/, 'is invalid'], index: true},
@@ -39,9 +39,7 @@ UserSchema.methods.toAuthJSON = function(){
   return {
     username: this.username,
     email: this.email,
-    token: this.generateJWT(),
-    bio: this.bio,
-    image: this.image
+    token: this.generateJWT()
   };
 };
 

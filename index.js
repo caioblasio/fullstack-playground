@@ -10,8 +10,8 @@ app.use(bodyParser.json());
 
 mongoose.connect(keys.mongoURI)
 
-//require('./services/passport');
 require('./models/User');
+require('./services/passport');
 app.use(require('./routes'));
 
 
