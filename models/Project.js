@@ -11,4 +11,15 @@ var ProjectSchema = new mongoose.Schema({
   });
 
 
+  ProjectSchema.methods.toJSON = function(){
+    return {
+      _id: this._id,
+      name: this.name,
+      createDate: this.createDate,
+      _user: this._user,
+      pacients: this.pacients
+    };
+  };
+
+
   mongoose.model('Project', ProjectSchema);
