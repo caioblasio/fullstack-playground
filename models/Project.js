@@ -21,5 +21,12 @@ var ProjectSchema = new mongoose.Schema({
     };
   };
 
+  ProjectSchema.methods.toPacientsJSON = function(){
+    return {
+      _id: this._id,
+      pacients: this.pacients
+    };
+  };
+
 
   mongoose.model('Project', ProjectSchema);

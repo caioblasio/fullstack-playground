@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const router = require('express').Router();
 const User = mongoose.model('User');
 const Project = mongoose.model('Project');
+const Pacient = mongoose.model('Pacient');
 const auth = require('../auth');
 
 // Preload article objects on routes with ':article'
@@ -37,5 +38,25 @@ router.post('/', auth.required, (req, res, next) => {
       }).catch(next);
   
   });
+
+
+router.get('/:project/pacients', auth.required, function(req, res, next) {
+    return res.json({project: req.project.toPacientsJSON()});
+});
+
+
+router.post('/:project/pacient', auth.required, (req, res, next) => {
+
+  const pacient = new Pacient(req.body.pacient);
+
+  console.log(pacient)
+
+  req.project.update(
+      {$push: {pacients: pacient}}
+  ).then(function(){
+      return res.json({project: req.project.toPacientsJSON()});
+    }).catch(next);
+
+});
 
   module.exports = router;
