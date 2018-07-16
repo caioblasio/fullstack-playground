@@ -24,10 +24,6 @@ router.get('/:project', auth.optional, function(req, res, next) {
 router.post('/', auth.required, (req, res, next) => {
     const { name } = req.body;
 
-    if(!name){
-      return res.status(422).json({errors: {name: "can't be blank"}});
-    }
-
     const project = new Project({
         name,
         _users: req.payload.id

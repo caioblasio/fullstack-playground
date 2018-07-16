@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
-const PacientSchema = require('./Pacient');
 const { Schema } = mongoose;
 
 var ProjectSchema = new mongoose.Schema({
     name: {type: String, required: true},
     createDate: { type: Date, default: Date.now },
-    _user: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    pacients: [PacientSchema]
+    _users: [{type: Schema.Types.ObjectId, ref: 'User', required: true}],
+    pacients: [{type: Schema.Types.ObjectId, ref: 'Pacient'}]
 
   });
 
@@ -16,15 +15,7 @@ var ProjectSchema = new mongoose.Schema({
       _id: this._id,
       name: this.name,
       createDate: this.createDate,
-      _user: this._user,
-      pacients: this.pacients
-    };
-  };
-
-  ProjectSchema.methods.toPacientsJSON = function(){
-    return {
-      _id: this._id,
-      pacients: this.pacients
+      _users: this._user
     };
   };
 

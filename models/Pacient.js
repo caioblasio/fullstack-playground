@@ -5,7 +5,8 @@ var PacientSchema = new mongoose.Schema({
     document: String,
     phoneNumber: [Number],
     paymentDay: Number,
-    createDate: { type: Date, default: Date.now },
+    createDate: { type: Date, default: Date.now }
+
   });
 
 
